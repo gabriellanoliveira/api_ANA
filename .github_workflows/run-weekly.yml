@@ -1,1 +1,31 @@
+name: Run Code Weekly
 
+on:
+  schedule:
+    # Executar semanalmente às segundas-feiras às 12:00 UTC
+    - cron: "0 12 * * 1"
+
+jobs:
+  run-code:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checar o repositório
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Configurar Python (se necessário)
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9' # Escolha a versão necessária do Python
+
+      # Instalar dependências
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      # Executar o código
+      - name: Run script
+        run: |
+          python seu_codigo.py
